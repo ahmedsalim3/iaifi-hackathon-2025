@@ -1,5 +1,5 @@
 [project]
-name = "PACKAGE"
+name = "nebula"
 description = "DESCRIPTION"
 readme = "README.md"
 dynamic = ["version"]
@@ -67,10 +67,10 @@ warn_unused_configs = true
 ignore_missing_imports = true
 
 [tool.setuptools]
-packages = ["PACKAGE"]
+packages = ["nebula"]
 
 [tool.setuptools_scm]
 # can be empty if no extra settings are needed, presence enables setuptools_scm
 
 [tool.setuptools.dynamic]
-version = {attr = "PACKAGE.version.__version__"}
+version = {attr = "nebula.version.__version__"}

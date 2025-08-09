@@ -1,16 +1,22 @@
-# Water Template
+Domain Adaptation In Galaxy Morphology
+======================================
 
-A simple Python package template for quick project setup.
+Domain Adaptation for Galaxy Morphology Classification using llustrisTNG and Galaxy Zoo Evolution dataset
 
-## Usage
-To start a new project, follow the steps below:
+## Prerequisites
 
-1. Replace `PACKAGE` with the name of your project:
-   - `pyproject.toml`
-   - `docs/mkdocs.yml`
-   - `PACKAGE/` directory (rename to your package name)
+- Python 3.10 or higher
+- [`uv`](https://docs.astral.sh/uv/getting-started/installation/) package manager
 
-2. Run the following make commands to install the project:
+## Installation
+
+1. Clone this [`repo`](https://github.com/ahmedsalim3/domain-adaptation-in-galaxy-morphology.git)
+
+```bash
+git clone https://github.com/ahmedsalim3/domain-adaptation-in-galaxy-morphology.git
+```
+
+2. Install dependencies:
 
 ```bash
 make install

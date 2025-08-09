@@ -1,7 +1,7 @@
-site_name: PACKAGE
+site_name: Nebula
 site_description: A Water Template
 site_author: Ahmed Salim
-site_url: https://ahmedsalim.github.io/watertemplate
+site_url: https://ahmedsalim.github.io/domain-adaptation-in-galaxy-morphology
 
 theme:
   name: readthedocs
