@@ -1,0 +1,10 @@
+site_name: PACKAGE
+site_description: A Water Template
+site_author: Ahmed Salim
+site_url: https://ahmedsalim.github.io/watertemplate
+
+theme:
+  name: readthedocs
+  language: en
+
+docs_dir: docs
