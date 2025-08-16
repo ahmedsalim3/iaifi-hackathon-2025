@@ -8,10 +8,10 @@ Getting Started
 
 ## Installation
 
-1. Clone this [`repo`](https://github.com/ahmedsalim3/domain-adaptation-in-galaxy-morphology.git)
+1. Clone this [`repo`](https://github.com/ahmedsalim3/iaifi-hackathon-2025.git)
 
 ```bash
-git clone https://github.com/ahmedsalim3/domain-adaptation-in-galaxy-morphology.git
+git clone https://github.com/ahmedsalim3/iaifi-hackathon-2025.git
 ```
 
 2. Install dependencies:

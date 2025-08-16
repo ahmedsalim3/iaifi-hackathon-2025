@@ -1,10 +1,20 @@
 site_name: Nebula
-site_description: A Water Template
+site_description: Domain Adaptation in Galaxy Morphology
 site_author: Ahmed Salim
-site_url: https://ahmedsalim.github.io/domain-adaptation-in-galaxy-morphology
+site_url: https://ahmedsalim.github.io/iaifi-hackathon-2025
+
+repo_url: https://github.com/ahmedsalim3/iaifi-hackathon-2025
+edit_uri: edit/main/docs/docs/
+
+copyright: Copyright &copy; 2025 Ahmed Salim
 
 theme:
   name: readthedocs
   language: en
 
 docs_dir: docs
+
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - Datasets: datasets.md
