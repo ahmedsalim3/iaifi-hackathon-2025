@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="author" content="Ahmed Salim" /><link rel="canonical" href="https://ahmedsalim.github.io/iaifi-hackathon-2025/datasets/" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Datasets - Nebula</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Datasets";
+        var mkdocs_page_input_path = "datasets.md";
+        var mkdocs_page_url = "/iaifi-hackathon-2025/datasets/";
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Nebula
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../getting-started/">Getting Started</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Datasets</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#source-dataset-illustristng">Source Dataset (IllustrisTNG)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#data-structure">Data Structure</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#target-dataset-galaxy-zoo-2">Target Dataset (Galaxy Zoo 2)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#methodology">Methodology</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#data-processing">Data Processing</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#data-structure_1">Data Structure</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#data-processing-implementation">Data Processing Implementation</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#data-access">Data Access</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#dataset-labels">Dataset Labels</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#image-downloads">Image Downloads</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#data-directory-structure">Data Directory Structure</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Nebula</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Datasets</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/ahmedsalim3/iaifi-hackathon-2025/edit/main/docs/docs/datasets.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="datasets">Datasets</h1>
+<p>This project uses two main datasets for domain adaptation research in galaxy morphology classification.</p>
+<h2 id="overview">Overview</h2>
+<p>We work with a <strong>source dataset</strong> from simulated galaxies and a <strong>target dataset</strong> from real galaxy observations to study domain adaptation techniques.</p>
+<h2 id="source-dataset-illustristng">Source Dataset (IllustrisTNG)</h2>
+<p>The source dataset is based on the <a href="https://www.tng-project.org/">IllustrisTNG</a> Project, with morphology labels available <a href="https://github.com/ahmedsalim3/domain-adaptation-in-galaxy-morphology/blob/main/data/source/llustrisTNG/labels_master.json">here</a>. It contains three morphology classes: elliptical, spiral, and irregular galaxies.</p>
+<h3 id="data-structure">Data Structure</h3>
+<p>Each entry in the source dataset contains the following information:</p>
+<pre><code class="language-json">{
+  &quot;image_path&quot;: &quot;local/path/to/image/subhalo_{subhalo_id}.png&quot;,
+  &quot;subhalo_id&quot;: &quot;Unique galaxy ID matching image filename&quot;,
+  &quot;mass&quot;: &quot;Total stellar mass [in solar masses, M_sun]&quot;,
+  &quot;star_forming&quot;: &quot;true if galaxy is actively forming stars, false otherwise&quot;,
+  &quot;has_agn&quot;: &quot;true if galaxy hosts an active galactic nucleus (AGN), false otherwise&quot;,
+  &quot;is_compact&quot;: &quot;true if galaxy is compact (stellar mass / half-mass-radius^2 &gt; 1e9 M_sun/kpc^2), false otherwise&quot;,
+  &quot;metallicity&quot;: &quot;Stellar metallicity [in units of solar metallicity Z]&quot;,
+  &quot;classification&quot;: &quot;'elliptical', 'spiral', or 'irregular'&quot;,
+  &quot;is_metalrich&quot;: &quot;true if average stellar metallicity &gt; solar, false otherwise&quot;
+}
+</code></pre>
+<h2 id="target-dataset-galaxy-zoo-2">Target Dataset (Galaxy Zoo 2)</h2>
+<p>The target dataset is constructed from the <a href="https://data.galaxyzoo.org/#section-8">Galaxy Zoo 2 (GZ2)</a> project, using the debiased vote fractions provided by <a href="https://academic.oup.com/mnras/article/461/4/3663/2608720?login=false">Hart et al. (2016)</a>.</p>
+<h3 id="methodology">Methodology</h3>
+<p>Hart et al. presented a method to correct classification bias in GZ2 by providing <em>debiased vote fractions</em> for morphological features (e.g., smooth, features/disk, spiral arms, odd structures). These corrected vote fractions represent the probability that a galaxy belongs to a given morphological type after accounting for redshift and observational effects. In the paper, thresholds on these debiased votes can be applied to extract clean samples of galaxies with reliable morphology (e.g., high-confidence ellipticals or spirals).</p>
+<h3 id="data-processing">Data Processing</h3>
+<p>We followed the paper's approach of applying strict thresholds to these debiased vote fractions in order to obtain an <em>ultra-clean target dataset</em> containing only the most confidently labeled galaxies. Specifically:</p>
+<ul>
+<li><strong>Ellipticals</strong> were required to have very high smoothness probability, strong "no spiral" votes, and low edge-on contamination</li>
+<li><strong>Spirals</strong> were required to have strong spiral-arm and feature/disk votes, while excluding highly edge-on systems</li>
+<li><strong>Irregulars</strong> were selected when galaxies had strong votes for "odd/irregular," "merger," or "disturbed" features</li>
+<li>Galaxies flagged as <em>artifacts</em> (stars, imaging issues) were removed</li>
+</ul>
+<h3 id="data-structure_1">Data Structure</h3>
+<p>The resulting dataset is stored in JSON format with image paths, object IDs, classification labels, and confidence metrics used for filtering. Each entry contains the following information:</p>
+<pre><code class="language-json">{
+  &quot;image_path&quot;: &quot;local/path/to/image/{asset_id}.png&quot;,
+  &quot;objid&quot;: &quot;SDSS Data Release 7 object ID for cross-referencing with astronomical catalogs&quot;,
+  &quot;classification&quot;: &quot;'elliptical', 'spiral', or 'irregular'&quot;,
+  &quot;metrics&quot;: {
+    &quot;artifact_prob&quot;: &quot;Probability of being an artifact (star or imaging issue) - galaxies with high values are filtered out&quot;,
+    &quot;smooth_prob&quot;: &quot;Probability of having smooth, featureless morphology (high values indicate elliptical galaxies)&quot;,
+    &quot;features_prob&quot;: &quot;Probability of having disk features or structure (high values indicate spiral/disk galaxies)&quot;,
+    &quot;edgeon_prob&quot;: &quot;Probability of being viewed edge-on (high values may indicate classification uncertainty)&quot;,
+    &quot;spiral_prob&quot;: &quot;Probability of having spiral arm structure (high values indicate spiral galaxies)&quot;,
+    &quot;nospiral_prob&quot;: &quot;Probability of having no spiral structure (high values support elliptical classification)&quot;,
+    &quot;irregular_prob&quot;: &quot;Probability of having irregular, asymmetric morphology&quot;,
+    &quot;merger_prob&quot;: &quot;Probability of being involved in a galaxy merger&quot;,
+    &quot;disturbed_prob&quot;: &quot;Probability of having disturbed or unusual structure&quot;,
+    &quot;odd_prob&quot;: &quot;Probability of having any odd or unusual features&quot;
+  }
+}
+</code></pre>
+<p>The resulting dataset can be found on <a href="https://github.com/ahmedsalim3/domain-adaptation-in-galaxy-morphology/blob/main/data/target/labels_master_top_n.json">GitHub</a>. In order to match the source dataset of 1,500 galaxies, we select the top N galaxies for each class, sorted by the strongest confidence metric relevant to that class.</p>
+<h3 id="data-processing-implementation">Data Processing Implementation</h3>
+<p>The preprocessing script that produced this target dataset implementation can be found in <a href="https://github.com/ahmedsalim3/domain-adaptation-in-galaxy-morphology/blob/main/nebula/data/gz2.py"><code>nebula/data/gz2.py</code></a>.</p>
+<h2 id="data-access">Data Access</h2>
+<h3 id="dataset-labels">Dataset Labels</h3>
+<ul>
+<li><strong>Source Dataset (IllustrisTNG)</strong>: <a href="https://github.com/ahmedsalim3/domain-adaptation-in-galaxy-morphology/blob/main/data/source/llustrisTNG/labels_master.json"><code>data/source/llustrisTNG/labels_master.json</code></a></li>
+<li><strong>Target Dataset (GZ2)</strong>: </li>
+<li>Full dataset: <a href="https://github.com/ahmedsalim3/domain-adaptation-in-galaxy-morphology/blob/main/data/target/labels_master.json"><code>data/target/labels_master.json</code></a></li>
+<li>Top N subset: <a href="https://github.com/ahmedsalim3/domain-adaptation-in-galaxy-morphology/blob/main/data/target/labels_master_top_n.json"><code>data/target/labels_master_top_n.json</code></a></li>
+</ul>
+<h3 id="image-downloads">Image Downloads</h3>
+<p>You can download galaxy images using the <a href="https://github.com/ahmedsalim3/domain-adaptation-in-galaxy-morphology/blob/main/data/download_raw.py">Python script</a> or <a href="https://github.com/ahmedsalim3/domain-adaptation-in-galaxy-morphology/blob/main/scripts/data">bash scripts</a>.</p>
+<h3 id="data-directory-structure">Data Directory Structure</h3>
+<p>After downloading, your data directory will be organized as follows:</p>
+<pre><code>data/
+├── source/
+│   └── llustrisTNG/
+│       ├── images/           # Galaxy images
+│       └── labels_master.json
+└── target/
+    ├── images_gz2/          # Galaxy images
+    ├── labels_master.json
+    ├── labels_master_top_n.json
+    └── README.txt
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../getting-started/" class="btn btn-neutral float-left" title="Getting Started"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright &copy; 2025 Ahmed Salim</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/ahmedsalim3/iaifi-hackathon-2025" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../getting-started/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
