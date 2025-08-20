@@ -1,87 +1,72 @@
-# Per-channel z-score normalization
-# =================================
-# 
-# This script computes the per-channel mean and standard deviation of an image dataset.
-# It is used to normalize the images to have a mean of 0 and a standard deviation of 1.
-# 
-# The formula for z-score normalization is:
-# 
-# Z-score normalization means that for each RGB channel (c):
-# z = (x - μ_c) / σ_c
-# 
-# where:
-# - x is the pixel value,
-# - μ_c is the mean pixel value of channel (c) across the entire dataset,
-# - σ_c is the standard deviation of channel (c) across the entire dataset.
-
-from pathlib import Path
-from typing import Optional
-import json
-
 import torch
-from torchvision import transforms
-from PIL import Image
-from tqdm import tqdm
+import numpy as np
 
-def compute_dataset_mean_std(dataset):
-    """
-    Compute mean/std over the samples already loaded in a GalaxyDataset
-    """
-    to_tensor = transforms.ToTensor()
 
-    n_images = 0
-    channel_sum = torch.zeros(3)
-    channel_sum_sq = torch.zeros(3)
+def compute_class_weights(
+    labels,
+    method: str = "effective",
+    beta: float = 0.9999,
+    normalize: bool = True,
+    dtype: torch.dtype = torch.float32,
+    device: torch.device | None = None,
+):
+    """Compute per-class weights for imbalanced datasets.
 
-    for img, _ in tqdm(dataset, desc="Computing mean/std"):
-        tensor = to_tensor(img)  # [C,H,W]
-        n_images += 1
-        channel_sum += tensor.mean(dim=(1, 2))
-        channel_sum_sq += (tensor ** 2).mean(dim=(1, 2))
+    Supports:
+    - method="balanced": inverse-frequency weighting (same average weight of 1 over present classes)
+    - method="effective": Class-Balanced weights based on Effective Number of Samples
+      https://arxiv.org/abs/1901.05555, CVPR'19.
+      https://github.com/vandit15/Class-balanced-loss-pytorch/
 
-    mean = channel_sum / n_images
-    std = (channel_sum_sq / n_images - mean ** 2).sqrt()
-    return mean, std
-
-def _compute_dataset_mean_std(images_path: Path, ext: str = "*.png", save: Optional[bool] = False):
-    """
-    Compute per-channel mean and standard deviation for an image dataset and save the results to a JSON file.
 
     Args:
-        images_path (Path): Path to the folder containing images.
-        ext (str): File extension pattern (default: '*.png').
-        save (bool): Whether to save the results to a JSON file.
+        labels: 1D array-like of integer class labels (NumPy array or torch tensor).
+        method: "balanced" or "effective".
+        beta: Beta parameter for the effective number formula (only used when method="effective").
+        normalize: If True, rescale weights so the mean over present classes equals 1.
+        dtype: Torch dtype of the returned tensor.
+        device: Optional torch device for the returned tensor.
+
     Returns:
-        tuple: (mean, std), both torch.Tensor of shape (3,)
+        torch.Tensor of shape [C], where C = max(labels) + 1.
     """
 
-    # Transform to tensor (0..1)
-    to_tensor = transforms.ToTensor()
-    image_files = list(images_path.glob(ext))
+    # Convert labels to a flat NumPy integer array
+    if isinstance(labels, torch.Tensor):
+        labels = labels.detach().cpu().numpy()
+    else:
+        labels = np.asarray(labels)
+    labels = labels.reshape(-1)
+    assert np.issubdtype(labels.dtype, np.integer), "Labels must be integers."
 
-    if not image_files:
-        raise ValueError(f"No images found in {images_path} with extension {ext}")
-    
-    # Accumulators
-    n_images = 0
-    channel_sum = torch.zeros(3)
-    channel_sum_sq = torch.zeros(3)
+    if labels.size == 0:
+        return torch.zeros(0, dtype=dtype, device=device)
 
-    for img_file in tqdm(image_files, desc="Computing mean/std"):
-        img = Image.open(img_file).convert("RGB")
-        tensor = to_tensor(img)  # shape: [C, H, W]
+    # Determine number of classes from labels
+    inferred_num_classes = int(labels.max()) + 1
+    counts = np.bincount(labels, minlength=inferred_num_classes).astype(np.int64)
 
-        n_images += 1
-        channel_sum += tensor.mean(dim=(1, 2))
-        channel_sum_sq += (tensor ** 2).mean(dim=(1, 2))
+    present_mask = counts > 0
 
-    # Mean over dataset
-    mean = channel_sum / n_images
-    std = (channel_sum_sq / n_images - mean ** 2).sqrt()
+    if method.lower() == "balanced":
+        # Standard balanced weights
+        total = labels.size
+        num_present = int(present_mask.sum())
+        weights = np.empty_like(counts, dtype=np.float64)
+        weights[present_mask] = total / (max(num_present, 1) * counts[present_mask])
 
-    if save:
-        result = {"mean": mean.tolist(), "std": std.tolist()}
-        with open(images_path.parent / "mean_std.json", "w") as f:
-            json.dump(result, f, indent=4)
+    elif method.lower() == "effective":
+        # Effective number of samples
+        weights = np.zeros_like(counts, dtype=np.float64)
+        if np.any(present_mask):
+            effective_num = 1.0 - np.power(beta, counts[present_mask])
+            weights[present_mask] = (1.0 - beta) / np.maximum(effective_num, np.finfo(np.float64).eps)
 
-    return mean, std
+    # normalize so the average weight over present classes is 1.0
+    if normalize and np.any(present_mask):
+        present_sum = float(weights[present_mask].sum())
+        if present_sum > 0.0:
+            scale_target = int(present_mask.sum())
+            weights = weights * (scale_target / present_sum)
+
+    return torch.tensor(weights, dtype=dtype, device=device)
