@@ -175,14 +175,19 @@
 <h3 id="data-directory-structure">Data Directory Structure</h3>
 <p>After downloading, your data directory will be organized as follows:</p>
 <pre><code>data/
-├── source/
-│   └── llustrisTNG/
-│       ├── images/           # Galaxy images
-│       └── labels_master.json
-└── target/
-    ├── images_gz2/          # Galaxy images
+├── download_raw.py
+├── source
+│   ├── labels_basic.json
+│   ├── labels_master.json
+│   ├── llustrisTNG       -&gt; Galaxy images
+│   └── mean_std.json
+└── target
+    ├── gz2_filename_mapping.csv
+    ├── gz2_hart16.csv
+    ├── images_gz2        -&gt; Galaxy images
     ├── labels_master.json
     ├── labels_master_top_n.json
+    ├── mean_std.json
     └── README.txt
 </code></pre>
               
