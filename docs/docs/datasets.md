@@ -79,7 +79,7 @@ The preprocessing script that produced this target dataset implementation can be
 
 ### Dataset Labels
 
-- **Source Dataset (IllustrisTNG)**: [`data/source/llustrisTNG/labels_master.json`][tng-labels]
+- **Source Dataset (IllustrisTNG)**: [`data/source/labels_master.json `][tng-labels]
 - **Target Dataset (GZ2)**: 
   - Full dataset: [`data/target/labels_master.json`][gz2-labels]
   - Top N subset: [`data/target/labels_master_top_n.json`][gz2-labels-topn]
@@ -94,21 +94,26 @@ After downloading, your data directory will be organized as follows:
 
 ```
 data/
-├── source/
-│   └── llustrisTNG/
-│       ├── images/           # Galaxy images
-│       └── labels_master.json
-└── target/
-    ├── images_gz2/          # Galaxy images
+├── download_raw.py
+├── source
+│   ├── labels_basic.json
+│   ├── labels_master.json
+│   ├── llustrisTNG       -> Galaxy images
+│   └── mean_std.json
+└── target
+    ├── gz2_filename_mapping.csv
+    ├── gz2_hart16.csv
+    ├── images_gz2        -> Galaxy images
     ├── labels_master.json
     ├── labels_master_top_n.json
+    ├── mean_std.json
     └── README.txt
 ```
 
 [tng-website]: https://www.tng-project.org/
 [gz2hart]: https://data.galaxyzoo.org/#section-8
 [gz2hart-paper]: https://academic.oup.com/mnras/article/461/4/3663/2608720?login=false
-[tng-labels]: https://github.com/ahmedsalim3/domain-adaptation-in-galaxy-morphology/blob/main/data/source/llustrisTNG/labels_master.json
+[tng-labels]: https://github.com/ahmedsalim3/domain-adaptation-in-galaxy-morphology/blob/main/data/source/labels_master.json 
 [gz2-labels-topn]: https://github.com/ahmedsalim3/domain-adaptation-in-galaxy-morphology/blob/main/data/target/labels_master_top_n.json
 [gz2-labels]: https://github.com/ahmedsalim3/domain-adaptation-in-galaxy-morphology/blob/main/data/target/labels_master.json
 [gz2-preprocessing]: https://github.com/ahmedsalim3/domain-adaptation-in-galaxy-morphology/blob/main/nebula/data/gz2.py
