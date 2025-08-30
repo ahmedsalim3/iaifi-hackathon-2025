@@ -1,0 +1,12 @@
+escnn==1.0.11
+geomloss
+torch==2.8.0
+torchsummary==1.5.1
+scikit-learn<1.4.0
+numpy==1.26.4
+pandas==2.2.2
+tqdm==4.67.1
+pyyaml==6.0.2
+torchvision==0.23.0
+matplotlib==3.10.5
+seaborn==0.13.2
