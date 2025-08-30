@@ -1,0 +1,28 @@
+seed: 42
+
+output_dir: "./outputs"
+data:
+  data_root: "./data"
+  val_size: 0.2
+  use_class_weights: true
+  normalize: true
+
+model:
+  name: "cnn"
+  input_size: [128, 128]
+  num_classes: 3
+
+parameters:
+  epochs: 80
+  batch_size: 32
+  lr: 2e-4
+  weight_decay: 1e-4
+  milestones: [40, 60]
+  lr_decay: 0.1
+  early_stopping: 12
+  report_interval: 1
+  warmup: 3
+  loss_type: "cross_entropy"
+  # if using focal, you can optionally supply alpha per-class
+  # otherwise the training will use class weights
+  # alpha: [0.2, 0.2, 0.2, 0.2, 0.2]

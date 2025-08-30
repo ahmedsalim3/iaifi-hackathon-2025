@@ -1,0 +1,37 @@
+class_metrics:
+  0:
+    centroid_distance: 0.47589102387428284
+    class_mmd: 0.20109343528747559
+    source_samples: 340
+    source_variance: 0.0003268131404183805
+    target_samples: 920
+    target_variance: 0.00014316008309833705
+    variance_ratio: 0.4380353328563933
+  1:
+    centroid_distance: 0.18597498536109924
+    class_mmd: 0.0309603214263916
+    source_samples: 1060
+    source_variance: 0.0002744226949289441
+    target_samples: 2000
+    target_variance: 0.0002752865257207304
+    variance_ratio: 1.0031112575416985
+  2:
+    centroid_distance: 0.7328367233276367
+    class_mmd: 0.4021754264831543
+    source_samples: 150
+    source_variance: 0.0007515651523135602
+    target_samples: 824
+    target_variance: 0.00023318563762586564
+    variance_ratio: 0.3102625690964563
+domain_classifier:
+  roc_auc: 0.6276550868486351
+overall_metrics:
+  A_distance: 0.8288628636191917
+  MMD: 0.010795235633850098
+  domain_accuracy: 0.7072157159047979
+  domain_silhouette: 0.19115230441093445
+summary:
+  avg_centroid_distance: 0.4649009108543396
+  avg_class_mmd: 0.21140972773234049
+  total_source_samples: 1550
+  total_target_samples: 3744

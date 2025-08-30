@@ -1,0 +1,42 @@
+best_DA_epoch: 100
+best_DA_loss: 0.07315184741925734
+best_classification_loss: 0.04598175747415576
+best_classification_loss_epoch: 8
+best_total_val_epoch: 8
+best_total_val_loss: 0.05314216292343843
+best_val_acc: 74.51612903225806
+best_val_epoch: 99
+data:
+  data_root: ./data
+  normalize: true
+  use_class_weights: true
+  val_size: 0.2
+device: cuda
+final_loss: 0.0005029652900702785
+model:
+  N: 16
+  dihedral: true
+  input_size:
+  - 128
+  - 128
+  name: enn
+  num_classes: 3
+output_dir: ./outputs
+parameters:
+  alpha:
+  - 0.3
+  - 0.3
+  - 0.4
+  batch_size: 4
+  early_stopping: 15
+  epochs: 100
+  loss_type: focal
+  lr: 1e-3
+  lr_decay: 0.1
+  milestones:
+  - 50
+  - 75
+  report_interval: 1
+  warmup: 5
+  weight_decay: 1e-4
+seed: 42

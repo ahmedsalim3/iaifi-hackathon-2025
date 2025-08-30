@@ -1,0 +1,28 @@
+seed: 42
+
+output_dir: "./outputs"
+data:
+  data_root: "./data"
+  val_size: 0.2
+  use_class_weights: true
+  normalize: true
+
+model:
+  name: "enn"
+  input_size: [128, 128]
+  N: 16
+  dihedral: true
+  num_classes: 3
+
+parameters:
+  epochs: 100
+  batch_size: 4
+  lr: 1e-3
+  weight_decay: 1e-4
+  milestones: [50, 75]
+  lr_decay: 0.1
+  early_stopping: 15
+  report_interval: 1
+  warmup: 5
+  loss_type: "focal"
+  alpha: [0.3,0.3,0.4]
